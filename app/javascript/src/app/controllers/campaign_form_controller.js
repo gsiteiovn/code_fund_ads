@@ -1,6 +1,5 @@
 import { Controller } from 'stimulus'
 // import Rails from 'rails-ujs';
-import { Binding } from '@stimulus/core/dist/src/binding'
 
 export default class extends Controller {
   static targets = [
@@ -40,16 +39,12 @@ export default class extends Controller {
       credentials: 'same-origin',
       headers: { 'X-CSRF_Token': Rails.csrfToken() }
     })
-      .then(
-        (response => {
-          return response.text()
-        }).bind(this)
-      )
-      .then(
-        (html => {
-          this.setCreativeOptions(html)
-        }).bind(this)
-      )
+      .then(response => {
+        return response.text()
+      })
+      .then(html => {
+        this.setCreativeOptions(html)
+      })
       .catch(function (error) {
         console.log(error)
       })

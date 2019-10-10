@@ -1,5 +1,4 @@
 import { Controller } from 'stimulus'
-import axios from 'axios'
 
 export default class extends Controller {
   toggle (event) {
@@ -18,11 +17,9 @@ export default class extends Controller {
       },
       body: JSON.stringify({ checked: checked })
     })
-      .then(
-        (response => {
-          return response.json()
-        }).bind(this)
-      )
+      .then(response => {
+        return response.json()
+      })
       .catch(function (error) {
         console.log(error)
       })

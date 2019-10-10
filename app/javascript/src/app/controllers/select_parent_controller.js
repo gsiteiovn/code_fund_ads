@@ -4,7 +4,6 @@ import { toArray } from '../utils'
 
 export default class extends Controller {
   connect () {
-    console.log('herrree')
     this.saveOrigChildOptionsState()
 
     this.changeHandler = this.filterChildren.bind(this)

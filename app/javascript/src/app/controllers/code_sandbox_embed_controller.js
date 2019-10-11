@@ -12,14 +12,18 @@ export default class extends Controller {
   createSandbox (params) {
     const url = `https://codesandbox.io/api/v1/sandboxes/define?json=1&parameters=${params}`
     return fetch(url, { method: 'GET', dataType: 'json' })
-      .then(response => {
-        return response.json()
-      })
-      .then(payload => {
-        this.element.src = `https://codesandbox.io/embed/${
-          payload.sandbox_id
-        }?hidenavigation=1&codemirror=1&highlights=12,13,14,15,16`
-      })
+      .then(
+        (response => {
+          return response.json()
+        }).bind(this)
+      )
+      .then(
+        (payload => {
+          this.element.src = `https://codesandbox.io/embed/${
+            payload.sandbox_id
+          }?hidenavigation=1&codemirror=1&highlights=12,13,14,15,16`
+        }).bind(this)
+      )
       .catch(function (error) {
         console.log(error)
       })

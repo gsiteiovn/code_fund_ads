@@ -8,10 +8,10 @@ export default class extends Controller {
 
     this.changeHandler = this.selectParent.bind(this)
     this.createdHandler = this.addSelect2EventListeners.bind(this)
-    this.beforeCacheHandler = () => {
+    this.beforeCacheHandler = (() => {
       this.restoreOrigParentOptionsState()
       jQuery(this.element).off('change.select2', this.changeHandler)
-    }
+    }).bind(this)
 
     document.addEventListener(
       'turbolinks:before-cache',

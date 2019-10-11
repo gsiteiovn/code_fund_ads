@@ -12,11 +12,14 @@ export default class extends Controller {
     this.inputTarget.select()
     document.execCommand('copy')
     this.inputTarget.value = 'Copied...'
-    setTimeout(() => {
-      this.inputTarget.selectionStart = this.inputTarget.selectionEnd
-      if (disabled) this.inputTarget.setAttribute('disabled', disabled)
-      this.inputTarget.disabled = disabled
-    }, 10)
-    setTimeout(() => (this.inputTarget.value = value), 1000)
+    setTimeout(
+      (() => {
+        this.inputTarget.selectionStart = this.inputTarget.selectionEnd
+        if (disabled) this.inputTarget.setAttribute('disabled', disabled)
+        this.inputTarget.disabled = disabled
+      }).bind(this),
+      10
+    )
+    setTimeout((() => (this.inputTarget.value = value)).bind(this), 1000)
   }
 }

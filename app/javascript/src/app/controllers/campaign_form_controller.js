@@ -40,12 +40,16 @@ export default class extends Controller {
       credentials: 'same-origin',
       headers: { 'X-CSRF_Token': Rails.csrfToken() }
     })
-      .then(response => {
-        return response.text()
-      })
-      .then(html => {
-        this.setCreativeOptions(html)
-      })
+      .then(
+        (response => {
+          return response.text()
+        }).bind(this)
+      )
+      .then(
+        (html => {
+          this.setCreativeOptions(html)
+        }).bind(this)
+      )
       .catch(function (error) {
         console.log(error)
       })

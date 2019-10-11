@@ -7,10 +7,10 @@ export default class extends Controller {
     this.saveOrigChildOptionsState()
 
     this.changeHandler = this.filterChildren.bind(this)
-    this.beforeCacheHandler = () => {
+    this.beforeCacheHandler = (() => {
       this.restoreOrigChildOptionsState()
       jQuery(this.element).off('change.select2', this.changeHandler)
-    }
+    }).bind(this)
 
     document.addEventListener(
       'turbolinks:before-cache',
@@ -60,11 +60,10 @@ export default class extends Controller {
   get childSelectTarget () {
     const id = this.element.dataset.child
     const element = document.getElementById(id)
-    if (!element) {
+    if (!element)
       console.log(
         `select-parent-controller: Unable to find a child with the id '${id}'`
       )
-    }
     return element
   }
 

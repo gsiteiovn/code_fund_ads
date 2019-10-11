@@ -17,9 +17,11 @@ export default class extends Controller {
       },
       body: JSON.stringify({ checked: checked })
     })
-      .then(response => {
-        return response.json()
-      })
+      .then(
+        (response => {
+          return response.json()
+        }).bind(this)
+      )
       .catch(function (error) {
         console.log(error)
       })

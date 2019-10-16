@@ -32,6 +32,7 @@ It helps your favorite projects thrive by paying maintainers the majority of all
     - [Preboot](#preboot)
     - [Scheduler](#scheduler)
     - [Database](#database)
+  - [Docker](#docker)
   - [Maxmind](#maxmind)
   - [Candidates for GEM extraction](#candidates-for-gem-extraction)
   - [Contributors](#contributors)
@@ -161,7 +162,7 @@ git clone https://github.com/gitcoinco/code_fund_ads.git
 cd /path/to/project
 
 # setup environment variables
-cp .env-example .env
+bin/copy_example_files
 
 # If you need a password for your postgres role, uncomment "#export PGPASSWORD='<password>' in the .env file and replace <password> with the role's password
 
@@ -212,6 +213,49 @@ SEE: https://github.com/gitcoinco/code_fund_ads/blob/master/.mert-example.yml
 cd /path/to/project
 ./bin/mert
 ```
+
+## Docker
+
+To run the app using Docker, you will need to do the following:
+
+```sh
+# Make sure you have docker installed on your machine. If not:
+brew cask install docker
+open /Applications/Docker.app
+
+# Clone the project and cd into it if you haven't already
+git clone https://github.com/gitcoinco/code_fund_ads.git
+cd /path/to/project
+
+# setup environment variables
+bin/copy_example_files
+
+# Build the images
+docker-compose build
+
+# Start the containers in detached mode
+docker-compose up -d
+
+# If this is the first time you have built and started the containers
+bin/docker_db_setup
+
+# To get a bash console inside of the containers
+docker-compose exec app bash
+
+# To stop your containers
+docker-compose stop
+
+# Stop containers and remove containers, networks, volumes, and images created by up that are not persisted
+docker-compose down
+```
+
+In order to run tests, you can do the following:
+
+```shell
+docker-compose -f docker-test.yml up
+```
+
+Checkout the [Docker documentation](https://docs.docker.com) for more information on interacting with Docker.
 
 ## Code Standards
 

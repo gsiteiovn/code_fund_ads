@@ -3,6 +3,7 @@ require "simplecov"
 SimpleCov.start
 require_relative "../config/environment"
 require_relative "./mmdb_test_helper"
+require "minitest/reporters"
 require "rails/test_help"
 require "webmock/minitest"
 require "mocha/minitest"

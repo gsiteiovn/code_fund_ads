@@ -34,6 +34,7 @@ yarn-debug.log*
 .yarn-integrity
 
 .env
+.env-docker
 .teamocil.yml
 .mertrc
 .tool-versions
@@ -43,3 +44,4 @@ yarn-debug.log*
 legacy
 lib/tasks/impressions.rake
 /coverage
+/coverage/

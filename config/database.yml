@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  host: localhost
+  host: <%= ENV.fetch("PG_HOST") { 'localhost' } %>
   database: <%= ENV.fetch("PG_DATABASE_NAME", "code_fund_ads_development") %>
 
 test:
   <<: *default
-  host: localhost
+  host: <%= ENV.fetch("PG_HOST") { 'localhost' } %>
   database: code_fund_ads_test
 
 production:

@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require "pathname"
+require "fileutils"
+include FileUtils
+
+# path to application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+
+def setup_db
+  system("docker-compose exec app bin/rails db:migrate:reset db:seed")
+end
+
+def container_running?
+  inspect = `docker inspect -f '{{.State.Running}}' code_fund_ads-app`
+
+  inspect.strip == "true"
+end
+
+def container_offline_message
+  abort("\n== Unable to setup database, app container is offline ==\n\n")
+end
+
+chdir APP_ROOT do
+  return container_offline_message unless container_running?
+
+  setup_db
+end
